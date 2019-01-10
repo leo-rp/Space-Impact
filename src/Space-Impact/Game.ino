@@ -4,6 +4,7 @@ void gameInit(){
 
 void gameDraw(){
   gameHud();
+  playerMove(); 
   playerDraw();
   bulletsDraw();  
 }
@@ -16,7 +17,10 @@ void gameHud(){
   
   /*score*/
   m.display.cursorY = 0;
-  m.display.cursorX = 65;
+  m.display.cursorX = 60;
+  if (player.score < 10000){
+    m.display.print('0');    
+  } 
   if (player.score < 1000){
     m.display.print('0');    
   } 
@@ -29,6 +33,14 @@ void gameHud(){
   m.display.print(player.score);
 }
 
+void invertedDisplay(){
+  m.display.fillScreen(BLACK);    
+  m.display.setColor(WHITE);   
+}
+
+void normalDisplay(){
+  m.display.setColor(BLACK);    
+}
 
 void game(){
   switch (gameState) {      
@@ -43,6 +55,9 @@ void game(){
         break;
       case GAME_OVER:
         gameOver();
+        break;      
+      case GAME_NEXT_LEVEL:
+        nextLevel();
         break;      
     }
 }

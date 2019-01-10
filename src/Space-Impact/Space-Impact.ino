@@ -5,6 +5,7 @@
 #define GAME_PLAY 1
 #define GAME_PAUSE 2
 #define GAME_OVER 3 
+#define GAME_NEXT_LEVEL 4 
 
 Mico m;
 byte gameState = 0;
@@ -24,7 +25,7 @@ typedef struct {
   byte width = 10;
   byte height = 7;
   byte lives = 3;
-  int score = 0;   
+  unsigned int  score = 0;   
 }
 Player;
 
@@ -32,9 +33,9 @@ Player player;
 
 void setup() {
   m.begin();  
-  
   randomSeed(analogRead(A4));      
-  m.battery.show = false;  
+  m.battery.show = false;
+  m.bootLogo = false;
   gameState = GAME_TITLE;
 }
 
@@ -62,19 +63,6 @@ void gamePlay() {
   } 
 }
 
-void levels(){  
-  switch (lvl) {      
-      case 1:
-        level_1();
-        break;      
-    }
-}
-
-
-void level_1(){
-  m.display.fillScreen(BLACK);    
-  m.display.setColor(WHITE);
-}
   
 void gamePause() {
   m.display.cursorX = 20;

@@ -22,7 +22,15 @@ void playerMove(){
     if (m.buttons.pressed(BTN_A) ) {
         btnCode = BTN_A;  
         bulletsNew();                
-    }        
+    }  
+
+    if (m.buttons.pressed(BTN_B) ) {
+        btnCode = BTN_B;
+        gameState = GAME_NEXT_LEVEL;          
+    }  
+  
+
+          
   }else{    
     if (m.buttons.released(btnCode) ){ 
       btnCode = BTN_ZERO; 
@@ -77,7 +85,6 @@ void playerMoveDown(){
   } 
 }
 
-void playerDraw(){
-  playerMove(); 
+void playerDraw(){  
   m.display.drawBitmap(player.x, player.y, hero_1);  
 }
