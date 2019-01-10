@@ -11,3 +11,13 @@ const byte hero_1[] PROGMEM = {16,7,
 };
 
 /* player */
+
+/* hud */
+const byte heart[] PROGMEM = {8,5,
+  B11011000,
+  B11111000,
+  B11111000,
+  B01110000,
+  B00100000,
+};
+/* hud */

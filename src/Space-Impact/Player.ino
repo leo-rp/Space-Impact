@@ -4,7 +4,7 @@ byte btnCode = BTN_ZERO;
 
 /* one key pressed at time ; 4 way fix*/
 void playerMove(){
-  if (btnCode == BTN_ZERO){   
+  if (btnCode == BTN_ZERO ){   
     if (m.buttons.pressed(BTN_LEFT) || m.buttons.repeat(BTN_LEFT, BTN_DURATION) ) {      
       btnCode = BTN_LEFT;      
     }   
@@ -18,6 +18,11 @@ void playerMove(){
     if (m.buttons.pressed(BTN_DOWN) || m.buttons.repeat(BTN_DOWN, BTN_DURATION) ) {      
       btnCode = BTN_DOWN;      
     }    
+    
+    if (m.buttons.pressed(BTN_A) ) {
+        btnCode = BTN_A;  
+        bulletsNew();                
+    }        
   }else{    
     if (m.buttons.released(btnCode) ){ 
       btnCode = BTN_ZERO; 
@@ -37,6 +42,12 @@ void playerMove(){
     case BTN_DOWN:
       playerMoveDown();
       break;
+     case BTN_A:
+      btnCode = BTN_ZERO;
+      break;
+     default: 
+      btnCode = BTN_ZERO; 
+      break;     
   }
 }
 
@@ -49,7 +60,7 @@ void playerMoveLeft(){
 
 
 void playerMoveUp(){
-  if (player.y > 0){
+  if (player.y > HUD_HEIGHT){
     player.y-= 1;
   } 
 }
@@ -64,4 +75,9 @@ void playerMoveDown(){
   if( (player.y + player.height ) < LCDHEIGHT){
     player.y+= 1;
   } 
+}
+
+void playerDraw(){
+  playerMove(); 
+  m.display.drawBitmap(player.x, player.y, hero_1);  
 }
